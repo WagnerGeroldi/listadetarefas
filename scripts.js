@@ -1,16 +1,15 @@
-const inputTarefa = document.querySelector('.nova-tarefa');
-const btnTarefa = document.querySelector('.btn-tarefa');
-const resultado = document.querySelector('#resultado')
-const ulTarefas = document.querySelector('.tarefas');
-const dataAtual = document.querySelector('.data');
-const pCheck = document.querySelector('.tarefaLista')
+const inputTask = document.querySelector('.nova-tarefa');
+const buttonTask = document.querySelector('.btn-tarefa');
+const result = document.querySelector('#resultado')
+const ulTask = document.querySelector('.tarefas');
+const today = document.querySelector('.data');
 
-let data = new Date();
-let dia = String(data.getDate()).padStart(2, '0')
-let mes = String(data.getMonth() + 1).padStart(2, '0')
-let ano = String(data.getUTCFullYear())
-let dataAgora = 'Hoje é ' + dia + '/' + mes + '/' + ano
-dataAtual.innerHTML = dataAgora;
+let dateLocal = new Date();
+let day = String(dateLocal.getDate()).padStart(2, '0')
+let month = String(dateLocal.getMonth() + 1).padStart(2, '0')
+let year = String(dateLocal.getUTCFullYear())
+let dateNow = 'Hoje é ' + day + '/' + month + '/' + year
+today.innerHTML = dateNow;
 
 function createLi() {
     const li = document.createElement('li');
@@ -18,80 +17,80 @@ function createLi() {
   }
 
 function clearInput() {
-    inputTarefa.value = '';
-    inputTarefa.focus();
+    inputTask.value = '';
+    inputTask.focus();
 }
 
 function buttonDelete(li) {
-    const botao = document.createElement('button');
-    botao.innerText = 'Apagar';
-    botao.setAttribute('class', 'button-list');
-    li.appendChild(botao);
+    const buttonDelete = document.createElement('button');
+    buttonDelete.innerText = 'Apagar';
+    buttonDelete.setAttribute('class', 'button-list');
+    li.appendChild(buttonDelete);
 }
 
-function buttonCheck(botao) {
-    const botaoConcluido = document.createElement('button');
-    botaoConcluido.innerText = 'Concluído';
-    botaoConcluido.setAttribute('class', 'button-check');
-    botao.appendChild(botaoConcluido);
+function buttonCheck(buttonDelete) {
+    const buttonTaskComplete = document.createElement('button');
+    buttonTaskComplete.innerText = 'Concluído';
+    buttonTaskComplete.setAttribute('class', 'button-check');
+    buttonDelete.appendChild(buttonTaskComplete);
 }
 
-function salvarTarefas() {
-    const liTarefas = ulTarefas.querySelectorAll('li');
-    const listaDeTarefas = [];
+function saveTask() {
+    const liTask = ulTask.querySelectorAll('li');
+    const listOfTasks = [];
 
-    for (let tarefa of liTarefas) {
-        let tarefaTexto = tarefa.innerText;
-        tarefaTexto = tarefaTexto.replace('Apagar', '').trim();
-        tarefaTexto = tarefaTexto.replace('Concluído', '').trim();
-        listaDeTarefas.push(tarefaTexto);
+    for (let tarefa of liTask) {
+        let textTask = tarefa.innerText;
+        textTask = textTask.replace('Apagar', '').trim();
+        textTask = textTask.replace('Concluído', '').trim();
+        listOfTasks.push(textTask);
     }
 
-    const tarefasJSON = JSON.stringify(listaDeTarefas);
-    localStorage.setItem('tarefas', tarefasJSON);
+    const taskJSON = JSON.stringify(listOfTasks);
+    localStorage.setItem('tarefas', taskJSON);
 }
 
-function adicionaTarefasSalvas() {
-    const tarefas = localStorage.getItem('tarefas');
-    const listaDeTarefas = JSON.parse(tarefas);
+function addSaveTasks() {
+    const tasks = localStorage.getItem('tarefas') ;
+    const listOfTasks = JSON.parse(tasks);
 
-    for (let tarefa of listaDeTarefas) {
-        criarTarefa(tarefa);
+    for (let task of listOfTasks) {
+        createTask(task);
     }
 }
-adicionaTarefasSalvas();
+addSaveTasks();
 
 //funcao criar tarefa
 
-function criarTarefa(textoInput) {
-    resultado.classList.add('content-right')
+function createTask(textInput) {
+    result.classList.add('content-right')
     const li = createLi();
-    li.innerText = textoInput;
-    ulTarefas.appendChild(li);
+    li.innerText = textInput;
+    ulTask.appendChild(li);
     clearInput();
     buttonDelete(li);
     buttonCheck(li);
-    salvarTarefas();
+    saveTask();
 }
 
 //acoes de evento
-btnTarefa.addEventListener('click', function () {
-    if (!inputTarefa.value) return;
-    criarTarefa(inputTarefa.value);
+buttonTask.addEventListener('click', function () {
+    if (!inputTask.value) return;
+    createTask(inputTask.value);
 })
 
 document.addEventListener('click', function (e) {
     const el = e.target;
     if (el.classList.contains('button-list')) {
         el.parentElement.remove();
-        salvarTarefas();
+        saveTask();
     }
 })
 
 document.addEventListener('click', function (e) {
     const el = e.target;
     if (el.classList.contains('button-check')) {
-        $('li').textNode().addClass('concluido')
+        $('li').first().addClass('concluido')
     }
 })
 
