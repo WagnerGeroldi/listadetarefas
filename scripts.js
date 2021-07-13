@@ -91,7 +91,7 @@ document.addEventListener('click', function (e) {
 document.addEventListener('click', function (e) {
     const el = e.target;
     if (el.classList.contains('button-check')) {
-        $('li p').first().addClass('concluido')
+        $('li').textNode().addClass('concluido')
     }
 })
 
