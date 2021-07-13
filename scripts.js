@@ -12,6 +12,11 @@ let ano = String(data.getUTCFullYear())
 let dataAgora = 'Hoje é ' + dia + '/' + mes + '/' + ano
 dataAtual.innerHTML = dataAgora;
 
+function createLi() {
+    const li = document.createElement('li');
+    return li;
+  }
+
 function clearInput() {
     inputTarefa.value = '';
     inputTarefa.focus();
@@ -31,37 +36,62 @@ function buttonCheck(botao) {
     botao.appendChild(botaoConcluido);
 }
 
+function salvarTarefas() {
+    const liTarefas = ulTarefas.querySelectorAll('li');
+    const listaDeTarefas = [];
+
+    for (let tarefa of liTarefas) {
+        let tarefaTexto = tarefa.innerText;
+        tarefaTexto = tarefaTexto.replace('Apagar', '').trim();
+        tarefaTexto = tarefaTexto.replace('Concluído', '').trim();
+        listaDeTarefas.push(tarefaTexto);
+    }
+
+    const tarefasJSON = JSON.stringify(listaDeTarefas);
+    localStorage.setItem('tarefas', tarefasJSON);
+}
+
+function adicionaTarefasSalvas() {
+    const tarefas = localStorage.getItem('tarefas');
+    const listaDeTarefas = JSON.parse(tarefas);
+
+    for (let tarefa of listaDeTarefas) {
+        criarTarefa(tarefa);
+    }
+}
+adicionaTarefasSalvas();
 
 //funcao criar tarefa
 
-function criarTarefa() {
+function criarTarefa(textoInput) {
     resultado.classList.add('content-right')
-    const li = document.createElement('li');
-    li.innerHTML = `<p class="tarefaLista">${inputTarefa.value}</p>`;
+    const li = createLi();
+    li.innerText = textoInput;
     ulTarefas.appendChild(li);
     clearInput();
     buttonDelete(li);
     buttonCheck(li);
+    salvarTarefas();
 }
 
 //acoes de evento
 btnTarefa.addEventListener('click', function () {
     if (!inputTarefa.value) return;
-    criarTarefa();
+    criarTarefa(inputTarefa.value);
 })
 
 document.addEventListener('click', function (e) {
     const el = e.target;
     if (el.classList.contains('button-list')) {
         el.parentElement.remove();
+        salvarTarefas();
     }
 })
 
 document.addEventListener('click', function (e) {
     const el = e.target;
     if (el.classList.contains('button-check')) {
-
-        $('.tarefaLista').first().addClass('concluido')
+        $('li p').first().addClass('concluido')
     }
 })
 
