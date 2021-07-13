@@ -1,9 +1,10 @@
-const inputTask = document.querySelector('.nova-tarefa');
-const buttonTask = document.querySelector('.btn-tarefa');
-const result = document.querySelector('#resultado')
-const ulTask = document.querySelector('.tarefas');
-const today = document.querySelector('.data');
+const inputTask = document.querySelector('.new-task');
+const buttonTask = document.querySelector('.btn-task');
+const result = document.querySelector('#result')
+const ulTask = document.querySelector('.tasks');
+const today = document.querySelector('.date');
 
+/***********Create Date **********/
 let dateLocal = new Date();
 let day = String(dateLocal.getDate()).padStart(2, '0')
 let month = String(dateLocal.getMonth() + 1).padStart(2, '0')
@@ -11,11 +12,13 @@ let year = String(dateLocal.getUTCFullYear())
 let dateNow = 'Hoje é ' + day + '/' + month + '/' + year
 today.innerHTML = dateNow;
 
+
+/****** Functions ******/
+
 function createLi() {
     const li = document.createElement('li');
-    li.innerHTML = `<button type="checkbox"></button>`
     return li;
-  }
+}
 
 function clearInput() {
     inputTask.value = '';
@@ -36,7 +39,6 @@ function saveTask() {
     for (let tarefa of liTask) {
         let textTask = tarefa.innerText;
         textTask = textTask.replace('Apagar', '').trim();
-        textTask = textTask.replace('Concluído', '').trim();
         listOfTasks.push(textTask);
     }
 
@@ -45,7 +47,7 @@ function saveTask() {
 }
 
 function addSaveTasks() {
-    const tasks = localStorage.getItem('tarefas') ;
+    const tasks = localStorage.getItem('tarefas');
     const listOfTasks = JSON.parse(tasks);
 
     for (let task in listOfTasks) {
@@ -54,24 +56,35 @@ function addSaveTasks() {
 }
 addSaveTasks();
 
-//funcao criar tarefa
+/********* Main Function ********/
 
 function createTask(textInput) {
     result.classList.add('content-right')
     const li = createLi();
-    li.innerText = String(textInput);
+    li.innerText = textInput;
     ulTask.appendChild(li);
     clearInput();
     buttonDelete(li);
     saveTask();
 }
 
-//acoes de evento
+//******** Events Actions ***********/
+
+//press enter and submit
+inputTask.addEventListener('keypress', function (e) {
+    if (e.keyCode === 13) {
+        if (!inputTask.value) return;
+        createTask(inputTask.value);
+    }
+});
+
+//event click button task
 buttonTask.addEventListener('click', function () {
     if (!inputTask.value) return;
     createTask(inputTask.value);
 })
 
+//event button delete task
 document.addEventListener('click', function (e) {
     const el = e.target;
     if (el.classList.contains('button-list')) {

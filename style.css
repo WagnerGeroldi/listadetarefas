@@ -18,7 +18,7 @@ header {
     align-items    : center;
 }
 
-.data {
+.date {
     background   : linear-gradient(to right, #FF512F, #F09819);
     padding      : 5px 10px;
     border-radius: 5px;
@@ -62,7 +62,7 @@ main {
     gap            : 15px;
 }
 
-.nova-tarefa {
+.new-task {
     width        : 80%;
     margin       : auto;
     font-size    : 1.4rem;
@@ -116,7 +116,7 @@ li {
         height        : 12vh;
     }
 
-    .data {
+    .date {
         margin-bottom: 10px;
     }
 
@@ -129,11 +129,11 @@ li {
         padding-bottom: 10px;
     }
 
-    #resultado {
+    #result {
         margin-top: 15px;
     }
 
-    .nova-tarefa {
+    .new-task {
         font-size: 1rem;
     }
 
