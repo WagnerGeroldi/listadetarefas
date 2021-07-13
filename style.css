@@ -45,7 +45,7 @@ main {
     font-weight: bold;
 }
 
-#resultado {
+ .content-right{
     background   : white;
     border-radius: 10px;
     width        : 80%;
@@ -129,11 +129,13 @@ li {
     }
 
     #content-left {
-        height: 30vh;
+        height: max-content;
+        padding-bottom: 10px;
     }
 
     #resultado {
         margin-top: 15px;
+        width: max-content;
     }
 
     .nova-tarefa {
