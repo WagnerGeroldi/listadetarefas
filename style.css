@@ -90,13 +90,12 @@ button:hover {
 li {
     list-style           : none;
     display              : grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap                  : 20px;
     margin-bottom        : 10px;
 }
 
-.button-list,
-.button-check {
+.button-list {
     text-decoration: none !important;
     background     : linear-gradient(to right, #FF512F, #F09819);
     border-radius  : 10px;
@@ -108,11 +107,6 @@ li {
     margin         : auto;
 }
 
-.concluido {
-    text-decoration      : line-through;
-    text-decoration-color: red;
-    text-decoration-style: double;
-}
 
 
 @media(max-width: 600px) {
@@ -151,10 +145,8 @@ li {
     li {
         grid-template-columns: 1fr;
         grid-template-rows   : 1fr 1fr;
-        grid-template-areas  :
-            'texto'
-            'botao1''botao2';
         gap: 10px;
+        text-align: center;
     }
 
     li>p {
@@ -163,15 +155,6 @@ li {
     }
 
     .button-list {
-        grid-area: botao1;
-    }
-
-    .button-check {
-        grid-area: botao2;
-    }
-
-    .button-list,
-    .button-check {
         width: 60%;
     }
 
