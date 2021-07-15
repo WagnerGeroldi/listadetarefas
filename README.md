@@ -1,4 +1,4 @@
-# Lista de Tarefas :rocket
+# Lista de Tarefas :rocket:
 
 ### Funcionalidades
 
@@ -10,7 +10,7 @@
 > Com esta lista de tarefas, você armazenará as tarefas em localStorage, ou seja, seu navegador guardará as tarefas inseridas, e se fechar o navegador e depois retornar, seguirá
 exatamente como estava antes.
 
-:link Link para começar a usar seu organizador de tarefas
+:link: Link para começar a usar seu organizador de tarefas
 
 https://wagnergeroldi.github.io/listadetarefas/
 
