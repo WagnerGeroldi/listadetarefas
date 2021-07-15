@@ -1,3 +1,21 @@
+:root {
+    --bg-total  : linear-gradient(to right, #FF512F, #F09819);
+    --bg-header : white;
+    --color-text: black;
+    --bg-cards  : white;
+    --line-input: 2px orange solid;
+}
+
+.night-mode {
+    transition  : 0.5s;
+    --bg-total  : linear-gradient(to right, #000428, #004e92);
+    --color-text: whitesmoke;
+    --bg-header : rgb(49, 49, 49);
+    --line-input: 2px rgb(13, 4, 94) solid;
+    --bg-cards  : rgb(131, 131, 131);
+
+}
+
 * {
     margin     : 0;
     padding    : 0;
@@ -6,20 +24,24 @@
     font-weight: 500;
 }
 
+
 body {
-    background: linear-gradient(to right, #FF512F, #F09819);
+    background: var(--bg-total);
 }
 
+
+
 header {
-    background     : white;
+    background     : var(--bg-header);
     height         : 10vh;
     display        : flex;
     justify-content: space-around;
     align-items    : center;
+    color          : var(--color-text);
 }
 
 .date {
-    background   : linear-gradient(to right, #FF512F, #F09819);
+    background   : var(--bg-total);
     padding      : 5px 10px;
     border-radius: 5px;
     color        : white;
@@ -32,11 +54,12 @@ main {
 }
 
 #content-left {
-    background   : white;
+    background   : var(--bg-cards);
     border-radius: 10px;
     height       : 50vh;
     width        : 80%;
     margin       : auto;
+    color        : var(--color-text);
 }
 
 #content-left>p {
@@ -46,13 +69,14 @@ main {
 }
 
 .content-right {
-    background   : white;
+    background   : var(--bg-cards);
+    color        : var(--color-text);
     border-radius: 10px;
     width        : 80%;
     margin       : auto;
     height       : max-content;
     padding      : 10px;
-    text-align: center;
+    text-align   : center;
 }
 
 #input {
@@ -69,11 +93,12 @@ main {
     font-size    : 1.4rem;
     outline-style: none;
     border       : none;
-    border-bottom: 2px orange solid;
+    border-bottom: var(--line-input);
+    background   : transparent;
 }
 
 #input>button {
-    background   : linear-gradient(to right, #FF512F, #F09819);
+    background   : var(--bg-total);
     border-radius: 10px;
     padding      : 10px;
     border       : none;
@@ -102,7 +127,7 @@ li {
 
 .button-list {
     text-decoration: none !important;
-    background     : linear-gradient(to right, #FF512F, #F09819);
+    background     : var(--bg-total);
     border-radius  : 10px;
     padding        : 5px;
     border         : none;
@@ -117,8 +142,28 @@ li {
 @media(max-width: 600px) {
 
     header {
-        flex-direction: column;
-        height        : 12vh;
+        display: grid;
+        height: max-content;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: 
+        "title title"
+        "date dark-mode";
+    }
+
+    h1 {
+        grid-area: title;
+        text-align: center;
+    }
+    .date {
+        grid-area: date;
+        width: max-content;
+    }
+    .dark-mode{
+        grid-area: dark-mode;
+        display: flex;
+        justify-content: space-between;
+        padding: 15px;
     }
 
     .date {
@@ -150,8 +195,8 @@ li {
     li {
         grid-template-columns: 1fr;
         grid-template-rows   : 1fr 1fr;
-        gap: 10px;
-        text-align: center;
+        gap                  : 10px;
+        text-align           : center;
     }
 
     li>p {
