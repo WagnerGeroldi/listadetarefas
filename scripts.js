@@ -16,9 +16,10 @@ today.innerHTML = dateNow;
 /****** Functions ******/
 
 function createLi() {
-    const li = document.createElement('li');
+    const li = document.createElement('li')
     return li;
 }
+
 
 function clearInput() {
     inputTask.value = '';
@@ -30,14 +31,15 @@ function buttonDelete(li) {
     buttonDelete.innerText = 'Apagar';
     buttonDelete.setAttribute('class', 'button-list');
     li.appendChild(buttonDelete);
+    
 }
 
 function saveTask() {
     const liTask = ulTask.querySelectorAll('li');
     const listOfTasks = [];
 
-    for (let tarefa of liTask) {
-        let textTask = tarefa.innerText;
+    for (let task of liTask) {
+        let textTask = task.innerText;
         textTask = textTask.replace('Apagar', '').trim();
         listOfTasks.push(textTask);
     }
@@ -50,8 +52,8 @@ function addSaveTasks() {
     const tasks = localStorage.getItem('tarefas');
     const listOfTasks = JSON.parse(tasks);
 
-    for (let task in listOfTasks) {
-        createTask(task);
+    for (let [key, value] of Object.entries(listOfTasks || NaN )) {
+        createTask(value);
     }
 }
 addSaveTasks();
