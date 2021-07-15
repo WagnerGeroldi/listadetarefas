@@ -98,11 +98,21 @@ document.addEventListener('click', function (e) {
 //dark mode
 
 const nightMode = document.querySelector('#night-mode')
-
-// ao clicar mudaremos as cores
 nightMode.addEventListener('click', () => {
-  // adiciona a classe `night-mode` ao html
   document.documentElement.classList.toggle('night-mode')
+
+  if (document.documentElement.classList.contains('night-mode')) {
+    localStorage.setItem('gmtNightMode', true)
+    return
+  }
+  localStorage.removeItem('gmtNightMode')
 })
+
+const nightModeStorage = localStorage.getItem('gmtNightMode')
+if (nightModeStorage) {
+    document.documentElement.classList.add('night-mode')
+    nightMode.checked = true
+}
+
 
 
