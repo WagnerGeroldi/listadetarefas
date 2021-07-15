@@ -100,7 +100,7 @@ document.addEventListener('click', function (e) {
 const nightMode = document.querySelector('#night-mode')
 nightMode.addEventListener('click', () => {
   document.documentElement.classList.toggle('night-mode')
-
+  
   if (document.documentElement.classList.contains('night-mode')) {
     localStorage.setItem('gmtNightMode', true)
     return

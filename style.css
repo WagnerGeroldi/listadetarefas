@@ -29,15 +29,23 @@ body {
     background: var(--bg-total);
 }
 
-
-
 header {
     background     : var(--bg-header);
     height         : 10vh;
-    display        : flex;
-    justify-content: space-around;
-    align-items    : center;
+    display        : grid;
+    grid-template-columns: 1fr 2fr;
     color          : var(--color-text);
+}
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dark-mode {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .date {
@@ -147,28 +155,22 @@ li {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr;
         grid-template-areas: 
-        "title title"
-        "date dark-mode";
+        "title"
+        "dark-mode";
     }
 
     h1 {
         grid-area: title;
         text-align: center;
     }
-    .date {
-        grid-area: date;
-        width: max-content;
-    }
     .dark-mode{
         grid-area: dark-mode;
         display: flex;
-        justify-content: space-between;
-        padding: 15px;
+        justify-content: space-around;
+        align-items: center;
     }
 
-    .date {
-        margin-bottom: 10px;
-    }
+
 
     main {
         grid-template-columns: 1fr;
